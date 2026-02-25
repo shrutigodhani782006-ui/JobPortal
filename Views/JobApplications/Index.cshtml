@@ -1,0 +1,105 @@
+﻿@model IEnumerable<JobPortal.Models.JobApplication>
+@{
+    ViewData["Title"] = "My Applications";
+}
+
+<div class="container my-5">
+    <h2 class="fw-bold text-primary mb-4"><i class="bi bi-card-checklist me-2"></i> My Applications</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            You have not applied for any jobs yet.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle table-hover table-bordered custom-table">
+                <thead class="table-light">
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Company</th>
+                        <th>Applied On</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var app in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@app.Job.Title</td>
+                            <td>@app.Job.Company?.Name </td>
+                            <td>@app.AppliedAt.ToShortDateString()</td>
+                            <td>
+                                @switch (app.Status)
+                                {
+                                    case JobPortal.Models.ApplicationStatus.Applied:
+                                        <span class="badge bg-secondary">Applied</span>
+                                        break;
+                                    case JobPortal.Models.ApplicationStatus.Shortlisted:
+                                        <span class="badge bg-info text-dark">Shortlisted</span>
+                                        break;
+                                    case JobPortal.Models.ApplicationStatus.Rejected:
+                                        <span class="badge bg-danger">Rejected</span>
+                                        break;
+                                    case JobPortal.Models.ApplicationStatus.Hired:
+                                        <span class="badge bg-success">Hired</span>
+                                        break;
+                                }
+                            </td>
+                            <td>
+                                <a asp-controller="Jobs"
+                                   asp-action="Details"
+                                   asp-route-id="@app.JobId"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-eye me-1"></i> View Job
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+<style>
+    .custom-table th {
+        background-color: #cce4ff; /* light blue header */
+        color: #003366;
+        font-weight: 600;
+        border-bottom: 2px solid #3399ff;
+    }
+
+    .custom-table td {
+        vertical-align: middle;
+    }
+
+    .custom-table tbody tr:hover {
+        background-color: #e6f2ff; /* light blue row hover */
+        transition: 0.2s ease;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.45em 0.6em;
+    }
+
+    .btn-outline-primary {
+        transition: all 0.2s ease;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #66b0ff;
+            border-color: #3399ff;
+            color: #fff;
+        }
+
+    h2 {
+        font-weight: 700;
+    }
+</style>

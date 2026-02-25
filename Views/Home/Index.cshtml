@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using JobPortal.Models
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <!-- Public Home Page (before login) -->
+    <div class="container my-5">
+        <!-- Hero Section -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 text-center text-lg-start">
+                <h1 class="display-4 fw-bold text-primary">Welcome to <span class="text-dark">JobPortal</span></h1>
+                <p class="lead text-muted mt-3">
+                    Find your dream job, apply seamlessly, and start your career journey with us.
+                </p>
+                <div class="mt-4">
+                    <a href="/Jobs" class="btn btn-primary btn-lg px-4 me-2">🔍 Search Jobs</a>
+                    <a href="/Identity/Account/Register" class="btn btn-outline-dark btn-lg px-4">📝 Register</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Job Search" class="img-fluid" style="max-height: 300px;">
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row text-center g-4 mb-5">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 rounded-4">
+                    <div class="card-body p-4">
+                        <i class="bi bi-briefcase-fill text-primary fs-1 mb-3"></i>
+                        <h5 class="fw-bold">Explore Jobs</h5>
+                        <p class="text-muted">Browse thousands of job opportunities tailored to your skills and interests.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 rounded-4">
+                    <div class="card-body p-4">
+                        <i class="bi bi-send-check-fill text-success fs-1 mb-3"></i>
+                        <h5 class="fw-bold">Easy Applications</h5>
+                        <p class="text-muted">Apply for jobs in just a few clicks and save your favorite listings.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 rounded-4">
+                    <div class="card-body p-4">
+                        <i class="bi bi-graph-up-arrow text-danger fs-1 mb-3"></i>
+                        <h5 class="fw-bold">Track Progress</h5>
+                        <p class="text-muted">Monitor your application status and never miss an update from employers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <p class="text-muted">
+                Learn more about
+                <a href="https://learn.microsoft.com/aspnet/core" target="_blank" class="fw-semibold text-decoration-none">
+                    building Web apps with ASP.NET Core
+                </a>.
+            </p>
+        </div>
+    </div>
+}
+else
+{
+    <!-- Redirect users to their dashboards -->
+    @* This will never render, because controller will redirect before reaching here *@
+    <div class="text-center my-5">
+        <p>Redirecting to your dashboard...</p>
+    </div>
+}

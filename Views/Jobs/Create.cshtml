@@ -1,0 +1,168 @@
+﻿@model JobPortal.Models.Job
+@{
+    ViewData["Title"] = "Create Job";
+}
+
+<div class="container my-5">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+            <h2 class="fw-bold mb-4 text-primary">Create Job</h2>
+
+            <!-- Alerts -->
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-warning rounded-4">@TempData["Error"]</div>
+            }
+
+            @if (ViewBag.ModelStateErrors != null)
+            {
+                <div class="alert alert-danger rounded-4">
+                    <strong>Validation errors:</strong>
+                    <ul>
+                        @foreach (var me in (IEnumerable<dynamic>)ViewBag.ModelStateErrors)
+                        {
+                            <li>
+                                <strong>@me.Key</strong>
+                                <ul>
+                                    @foreach (string e in me.Errors)
+                                    {
+                                        <li>@e</li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <form asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+
+                <!-- Job Title -->
+                <div class="form-floating mb-3">
+                    <input asp-for="Title" class="form-control form-control-soft" placeholder="Job Title" />
+                    <label asp-for="Title">Job Title</label>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <!-- Description -->
+                <div class="form-floating mb-3">
+                    <textarea asp-for="Description" class="form-control form-control-soft" style="height:120px" placeholder="Job Description"></textarea>
+                    <label asp-for="Description">Job Description</label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <!-- Location & Skills -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Location" class="form-control form-control-soft" placeholder="Location" />
+                            <label asp-for="Location">Location</label>
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Skills" class="form-control form-control-soft" placeholder="e.g. C#, SQL" />
+                            <label asp-for="Skills">Skills</label>
+                            <span asp-validation-for="Skills" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salary From & To -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="SalaryFrom" class="form-control form-control-soft" placeholder="Salary From" />
+                            <label asp-for="SalaryFrom">Salary From</label>
+                            <span asp-validation-for="SalaryFrom" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="SalaryTo" class="form-control form-control-soft" placeholder="Salary To" />
+                            <label asp-for="SalaryTo">Salary To</label>
+                            <span asp-validation-for="SalaryTo" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employment Type & Company -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="EmploymentType" class="form-select form-control-soft">
+                                <option value="">-- Select Type --</option>
+                                <option>Full-time</option>
+                                <option>Part-time</option>
+                                <option>Internship</option>
+                            </select>
+                            <label asp-for="EmploymentType">Employment Type</label>
+                            <span asp-validation-for="EmploymentType" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="CompanyId" asp-items="ViewBag.CompanyId" class="form-select form-control-soft">
+                                <option value="">-- Select Company --</option>
+                            </select>
+                            <label asp-for="CompanyId">Company</label>
+                            <span asp-validation-for="CompanyId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-lightblue btn-lg w-100 mt-3">Save Job</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Card rounding */
+    .card {
+        border-radius: 12px;
+    }
+
+    /* Soft blue input */
+    .form-control-soft {
+        border: 1px solid #cce4ff;
+        background-color: #f5faff;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+        .form-control-soft:focus {
+            border-color: #66b0ff;
+            box-shadow: 0 0 5px rgba(102, 176, 255, 0.3);
+            background-color: #ffffff;
+        }
+
+    /* Light blue button */
+    .btn-lightblue {
+        background-color: #66b0ff;
+        color: #fff;
+        border: none;
+        transition: all 0.2s ease;
+    }
+
+        .btn-lightblue:hover {
+            background-color: #4d94ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(102, 176, 255, 0.3);
+        }
+
+    .form-floating textarea {
+        height: 120px;
+    }
+
+    .alert {
+        margin-bottom: 1rem;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+    }
+</style>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

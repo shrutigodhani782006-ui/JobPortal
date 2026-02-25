@@ -1,0 +1,126 @@
+﻿@model JobPortal.Models.Job
+@{
+    ViewData["Title"] = "Edit Job";
+}
+
+<div class="container my-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-light border-bottom-0 py-3">
+            <h2 class="mb-0 fw-bold text-dark">Edit Job</h2>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Edit" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
+
+                <!-- Job Title -->
+                <div class="form-floating mb-3">
+                    <input asp-for="Title" class="form-control" placeholder="Job Title" />
+                    <label asp-for="Title">Job Title</label>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <!-- Description -->
+                <div class="form-floating mb-3">
+                    <textarea asp-for="Description" class="form-control" style="height:120px" placeholder="Job Description"></textarea>
+                    <label asp-for="Description">Job Description</label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Location" class="form-control" placeholder="Location" />
+                            <label asp-for="Location">Location</label>
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Skills" class="form-control" placeholder="Skills" />
+                            <label asp-for="Skills">Skills</label>
+                            <span asp-validation-for="Skills" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="SalaryFrom" class="form-control" placeholder="Salary From" />
+                            <label asp-for="SalaryFrom">Salary From</label>
+                            <span asp-validation-for="SalaryFrom" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="SalaryTo" class="form-control" placeholder="Salary To" />
+                            <label asp-for="SalaryTo">Salary To</label>
+                            <span asp-validation-for="SalaryTo" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="EmploymentType" class="form-select">
+                                <option value="">Select Type</option>
+                                <option>Full-time</option>
+                                <option>Part-time</option>
+                                <option>Internship</option>
+                            </select>
+                            <label asp-for="EmploymentType">Employment Type</label>
+                            <span asp-validation-for="EmploymentType" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="CompanyId" asp-items="ViewBag.CompanyId" class="form-select"></select>
+                            <label asp-for="CompanyId">Company</label>
+                            <span asp-validation-for="CompanyId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check form-switch mb-4">
+                    <input asp-for="IsActive" class="form-check-input" id="IsActive" />
+                    <label asp-for="IsActive" class="form-check-label">Active</label>
+                </div>
+
+                <button type="submit" class="btn w-100 btn-primary fw-bold py-2 fs-5">
+                    Save Changes
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Input focus effect */
+    .form-control:focus, .form-select:focus, textarea.form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        border-color: #007bff;
+    }
+
+    /* Card styling for modern look */
+    .card {
+        border-radius: 12px;
+    }
+
+    /* Button styling */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.2);
+        }
+</style>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

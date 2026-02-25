@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Employer Dashboard";
+    var userEmail = User.Identity?.Name;
+}
+
+<div class="container py-5">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary"> Welcome, @userEmail!</h1>
+        <p class="lead text-muted">Manage your companies, jobs, and applications all in one place.</p>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row g-4">
+        <!-- Companies Card -->
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 rounded-4 h-100 hover-shadow">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-building-fill fs-1 text-primary"></i>
+                    </div>
+                    <h5 class="fw-bold">My Companies</h5>
+                    <p class="text-muted small">Manage your companies and update their information.</p>
+                    <a asp-controller="Companies" asp-action="Index" class="btn btn-outline-primary w-100 mt-3">
+                        Manage Companies
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jobs Card -->
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 rounded-4 h-100 hover-shadow">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-briefcase-fill fs-1 text-success"></i>
+                    </div>
+                    <h5 class="fw-bold">My Jobs</h5>
+                    <p class="text-muted small">View and edit jobs you’ve posted for candidates.</p>
+                    <a asp-controller="Jobs" asp-action="MyJobs" class="btn btn-outline-success w-100 mt-3">
+                        Manage Jobs
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications Card -->
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 rounded-4 h-100 hover-shadow">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-person-lines-fill fs-1 text-danger"></i>
+                    </div>
+                    <h5 class="fw-bold">Applications</h5>
+                    <p class="text-muted small">Review and update job seeker applications.</p>
+                    <a asp-controller="Jobs" asp-action="MyJobs" class="btn btn-outline-danger w-100 mt-3">
+                        Manage Applications
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="mt-5 text-center">
+        <h4 class="fw-semibold mb-3">Quick Actions</h4>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a asp-controller="Jobs" asp-action="Create" class="btn btn-lg btn-primary">
+                <i class="bi bi-plus-circle me-2"></i> Post a New Job
+            </a>
+            <a asp-controller="Companies" asp-action="Create" class="btn btn-lg btn-secondary">
+                <i class="bi bi-building-add me-2"></i> Add a New Company
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Extra CSS for hover effects -->
+<style>
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        transition: 0.3s;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+    }
+</style>

@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Job Seeker Dashboard";
+    var userEmail = User.Identity?.Name;
+}
+
+<div class="container py-5">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">Welcome, @userEmail!</h1>
+        <p class="lead text-muted">Explore new opportunities and track your applications.</p>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row g-4 justify-content-center">
+        <!-- Browse Jobs Card -->
+        <div class="col-md-5 col-lg-4">
+            <div class="card shadow-lg border-0 rounded-4 h-100 hover-shadow">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-briefcase-fill fs-1 text-primary"></i>
+                    </div>
+                    <h5 class="fw-bold">Browse Jobs</h5>
+                    <p class="text-muted small">Search and apply for jobs that match your skills and interests.</p>
+                    <a asp-controller="Jobs" asp-action="Index" class="btn btn-outline-primary w-100 mt-3">
+                        Browse Jobs
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Applications Card -->
+        <div class="col-md-5 col-lg-4">
+            <div class="card shadow-lg border-0 rounded-4 h-100 hover-shadow">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="bi bi-card-checklist fs-1 text-success"></i>
+                    </div>
+                    <h5 class="fw-bold">My Applications</h5>
+                    <p class="text-muted small">Track and manage the jobs you’ve applied for.</p>
+                    <a asp-controller="JobApplications" asp-action="MyApplications" class="btn btn-outline-success w-100 mt-3">
+                        View Applications
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="mt-5 text-center">
+        <h4 class="fw-semibold mb-3">Quick Actions</h4>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a asp-controller="Jobs" asp-action="Index" class="btn btn-lg btn-primary">
+                <i class="bi bi-search me-2"></i> Browse Jobs
+            </a>
+            <a asp-controller="JobApplications" asp-action="MyApplications" class="btn btn-lg btn-success">
+                <i class="bi bi-card-checklist me-2"></i> My Applications
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Extra CSS for hover effects -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+<style>
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        transition: 0.3s;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    h1, h4, h5 {
+        font-weight: 700;
+    }
+</style>

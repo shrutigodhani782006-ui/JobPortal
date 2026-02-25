@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Apply for " + ViewBag.JobTitle;
+}
+
+<h2>Apply for @ViewBag.JobTitle</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="jobId" value="@ViewBag.JobId" />
+
+    <div class="form-group">
+        <label>Upload Resume (PDF/DOC)</label>
+        <input type="file" name="resume" class="form-control" />
+        <span asp-validation-summary="ModelOnly" class="text-danger"></span>
+
+    </div>
+
+    <div class="form-group mt-3">
+        <label>Cover Letter (optional)</label>
+        <textarea name="coverLetter" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Apply</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
